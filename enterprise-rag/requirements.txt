@@ -1,0 +1,18 @@
+# Add project dependencies here.
+langchain
+langchain-groq
+python-dotenv
+pypdf
+langchain_community
+langchain_huggingface
+sentence-transformers
+langchain-chroma
+langchain-text-splitters
+rank-bm25
+ragas
+datasets
+langchain-google-genai
+langfuse
+streamlit
+torchvision
+langgraph
