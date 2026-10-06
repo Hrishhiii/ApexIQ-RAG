@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "What is the Education Stipend available to full-time employees?",
+    "category": "answerable",
+    "expected_answer": "Full-time personnel are eligible for up to $1,500 per year for relevant certifications, technical courses, and industry conferences.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES HANDBOOK",
+    "expected_page": 5
+  },
+  {
+    "id": 2,
+    "question": "What can the Education Stipend be used for?",
+    "category": "answerable",
+    "expected_answer": "It can be used for relevant certifications, technical courses, and industry conferences.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES HANDBOOK",
+    "expected_page": 5
+  },
+  {
+    "id": 3,
+    "question": "How many days of notice must an individual contributor provide before resigning?",
+    "category": "answerable",
+    "expected_answer": "Individual contributors must provide a minimum of 2 weeks written notice.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES POLICY MANUAL",
+    "expected_page": 10
+  },
+  {
+    "id": 4,
+    "question": "How much notice must managers provide before resigning?",
+    "category": "answerable",
+    "expected_answer": "Managers, Directors, and Executive Leadership must provide 4 weeks written notice.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES POLICY MANUAL",
+    "expected_page": 10
+  },
+  {
+    "id": 5,
+    "question": "What company property must employees return when leaving the company?",
+    "category": "answerable",
+    "expected_answer": "Employees must surrender laptops, security badges, corporate cards, and proprietary documentation by or before their final working day.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES POLICY MANUAL",
+    "expected_page": 10
+  },
+  {
+    "id": 6,
+    "question": "Within how many days must expenses be submitted?",
+    "category": "answerable",
+    "expected_answer": "Expenses must be submitted within 30 calendar days of occurrence. Expenses submitted after 60 days will be rejected and not reimbursed.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES EXPENSE POLICY",
+    "expected_page": 8
+  },
+  {
+    "id": 7,
+    "question": "How frequently are approved expense claims paid?",
+    "category": "answerable",
+    "expected_answer": "Approved claims are paid bi-weekly directly to the employee's bank account via direct deposit.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES EXPENSE POLICY",
+    "expected_page": 8
+  },
+  {
+    "id": 8,
+    "question": "Who can approve an expense of $10,000?",
+    "category": "answerable",
+    "expected_answer": "A Vice President can approve a single transaction up to $25,000.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES EXPENSE POLICY",
+    "expected_page": 3
+  },
+  {
+    "id": 9,
+    "question": "How many days per week must hybrid employees work from office hubs?",
+    "category": "answerable",
+    "expected_answer": "Hybrid employees are required to work from designated office hubs at least 2 days per calendar week.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES POLICY MANUAL",
+    "expected_page": 4
+  },
+  {
+    "id": 10,
+    "question": "What is the minimum internet speed required for remote workers?",
+    "category": "answerable",
+    "expected_answer": "Remote workers must have reliable internet connectivity with a minimum speed of 50 Mbps download and 10 Mbps upload.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES POLICY MANUAL",
+    "expected_page": 4
+  },
+  {
+    "id": 11,
+    "question": "How long does expense approval take?",
+    "category": "borderline",
+    "expected_answer": "The provided documents do not specify how long expense approval takes.",
+    "expected_source": "APEX GLOBAL TECHNOLOGIES EXPENSE POLICY",
+    "expected_page": 8
+  },
+  {
+    "id": 12,
+    "question": "Can the Education Stipend be used to buy a gaming laptop?",
+    "category": "unanswerable",
+    "expected_answer": "The provided documents do not state that the Education Stipend can be used to purchase a gaming laptop.",
+    "expected_source": null,
+    "expected_page": null
+  },
+  {
+    "id": 13,
+    "question": "Who won the 2026 FIFA World Cup?",
+    "category": "unanswerable",
+    "expected_answer": "This information is not available in the provided documents.",
+    "expected_source": null,
+    "expected_page": null
+  },
+  {
+    "id": 14,
+    "question": "What is the current stock price of Apple?",
+    "category": "unanswerable",
+    "expected_answer": "This information is not available in the provided documents.",
+    "expected_source": null,
+    "expected_page": null
+  },
+  {
+    "id": 15,
+    "question": "How do I make chicken biryani?",
+    "category": "unanswerable",
+    "expected_answer": "This information is not available in the provided documents.",
+    "expected_source": null,
+    "expected_page": null
+  }
+]
