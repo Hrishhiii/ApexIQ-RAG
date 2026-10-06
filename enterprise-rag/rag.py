@@ -1,6 +1,7 @@
 """Core document discovery helpers for the enterprise RAG application."""
 from dotenv import load_dotenv
 import os
+import torch
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
@@ -20,7 +21,8 @@ langfuse = get_client()
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
-cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+cross_encoder = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2",activation_fn = torch.nn.Sigmoid())
+
 
 
 llm = ChatGroq(
@@ -104,18 +106,28 @@ def reciprocal_rank_fusion(vector_docs, bm25_docs, k=60, top_k=5):
     return [documents[key] for key in ranked_keys[:top_k]]
 
 @observe(name="Reranking Documents") # Manual tracing of the reranking function using Langfuse
-def reranking_documents(query,documents):
+def reranking_documents(query, documents, top_k=5):
     pairs = [
         (query, doc.page_content)
         for doc in documents
     ]
     scores = cross_encoder.predict(pairs)
-    reranked_docs = sorted (
-        zip(documents,scores),
+    reranked_docs = sorted(
+        zip(documents, scores),
         key=lambda x: x[1],
         reverse=True
     )
-    return [doc for doc, score in reranked_docs[:5]]
+    return reranked_docs[:top_k]
+
+def relevance_gate(reranked_docs, threshold=0.50):
+    relevant_docs = [
+        doc for doc,score in reranked_docs
+        if score >= threshold
+    ]
+    if not relevant_docs:
+        return None
+    
+    return relevant_docs
 
 
 def get_source_info(doc):
@@ -262,18 +274,36 @@ def rag_pipeline(query, history=None, session_id=None):
             print(f"Page: {doc.metadata.get('page', 'N/A')}")
             print(doc.page_content)
 
-        reranked_docs = reranking_documents(query, final_docs)
+        reranked_docs = reranking_documents(query, final_docs, top_k=5)
+
+        print("\n========== RERANKED RESULTS ==========")
+
+        for i, (doc, score) in enumerate(reranked_docs):
+            print(f"\n--- Reranked Result {i + 1} ---")
+            print(f"Score: {score:.4f}")
+            print(f"Page: {doc.metadata.get('page', 'N/A')}")
+            print(doc.page_content)
+
+        relevant_docs = relevance_gate(reranked_docs)
+
+        if relevant_docs is None:
+            return {
+            "answer": (
+                "I'm sorry, but I couldn't find relevant information in the knowledge base to answer your question."
+            ),
+            "sources": []
+        }
 
         # 6. CREATE CONTEXT FOR THE LLM
-        # Take the final RRF documents and combine their text
+        # Take the final relevant documents and combine their text
         # into one context string.
         context = "\n\n".join([
         f"[Page {get_source_info(doc)[1]}]\n{doc.page_content}"
-        for doc in reranked_docs
+        for doc in relevant_docs
     ])
 
         # 7. SEND FINAL CONTEXT + QUERY TO LLM
-        answer, sources = generate_answer(context, query, reranked_docs, langfuse_handler)
+        answer, sources = generate_answer(context, query, relevant_docs, langfuse_handler)
 
         return {
         "answer": answer,

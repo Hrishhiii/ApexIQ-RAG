@@ -16,3 +16,4 @@ langfuse
 streamlit
 torchvision
 langgraph
+torch
